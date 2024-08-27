@@ -18,7 +18,10 @@
 
     public class PrincipalComBusca {
         public static void main(String[] args) throws InterruptedException, IOException{
-            Scanner leitura = new Scanner(System.in);
+        	
+        	//Instanciando objetos para utilização durante o app
+        	
+            Scanner sc = new Scanner(System.in);
             Buscador buscador = new Buscador();
             List<Titulo> titulos = new ArrayList<>();
             Gson gson = new GsonBuilder()
@@ -28,8 +31,9 @@
             Escritor escritor = new Escritor();
 
             System.out.println("Digite a chave da sua API OMDB");
-            String apiKey = leitura.nextLine();
-            System.out.println("Digite um filme para busca: ");
+            String apiKey = sc.nextLine();
+            System.out.println("Para finalizar o programa escreva Sair");
+            
             String busca = " ";
 
 
@@ -37,7 +41,8 @@
             	
                 try {
                 	
-                    busca = leitura.nextLine();
+                	System.out.println("Digite um filme para busca: ");
+                    busca = sc.nextLine();
 
                     if (busca.equalsIgnoreCase("Sair")) {
                         break;
@@ -65,6 +70,8 @@
             }
             
             escritor.criarArquivo(titulos, gson);
+            
+            sc.close();
             System.out.println("Finalizando programa");
         }
     }
