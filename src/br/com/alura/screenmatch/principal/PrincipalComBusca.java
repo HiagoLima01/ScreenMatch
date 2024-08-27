@@ -1,6 +1,7 @@
     package br.com.alura.screenmatch.principal;
 
     import br.com.alura.screenmatch.excecao.AnoComMaisDe4CharsException;
+    import br.com.alura.screenmatch.excecao.TituloNaoExisteException;
     import br.com.alura.screenmatch.modelos.Buscador;
     import br.com.alura.screenmatch.modelos.Escritor;
     import br.com.alura.screenmatch.modelos.Titulo;
@@ -16,7 +17,7 @@
     import java.util.Scanner;
 
     public class PrincipalComBusca {
-        public static void main(String[] args) throws IOException, InterruptedException {
+        public static void main(String[] args) throws InterruptedException, IOException{
             Scanner leitura = new Scanner(System.in);
             Buscador buscador = new Buscador();
             List<Titulo> titulos = new ArrayList<>();
@@ -33,8 +34,9 @@
 
 
             while (!busca.equalsIgnoreCase("Sair")) {
-
+            	
                 try {
+                	
                     busca = leitura.nextLine();
 
                     if (busca.equalsIgnoreCase("Sair")) {
@@ -50,14 +52,19 @@
                     System.out.println(meuTitulo);
 
                     titulos.add(meuTitulo);
+                    
                 } catch (AnoComMaisDe4CharsException e) {
                     System.out.println("Aconteceu um erro");
                     System.out.println(e.getMessage());
+                  
+                } catch(TituloNaoExisteException e) {
+                	System.out.println("Aconteceu um erro");
+                    System.out.println(e.getMessage());
+                    
                 }
-
-
             }
-
+            
             escritor.criarArquivo(titulos, gson);
+            System.out.println("Finalizando programa");
         }
     }
